@@ -1,0 +1,16 @@
+--- cookbooks/openstack-network/recipes/l3_agent.rb-orig	2015-03-27 00:47:34.321019308 -0400
++++ cookbooks/openstack-network/recipes/l3_agent.rb	2015-03-27 00:54:19.085013984 -0400
+@@ -108,6 +108,13 @@
+ end
+ 
+ # As the fwaas package will be installed anyway, configure its config-file attributes following environment.
++directory '/etc/neutron/services/neutron-fwaas/' do
++  user node['openstack']['network']['platform']['user']
++  group node['openstack']['network']['platform']['group']
++  mode 00550
++  recursive true
++end
++
+ template '/etc/neutron/services/neutron-fwaas/fwaas_driver.ini' do
+   source 'services/neutron-fwaas/fwaas_driver.ini.erb'
+   user node['openstack']['network']['platform']['user']
