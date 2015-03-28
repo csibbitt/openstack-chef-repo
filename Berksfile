@@ -36,9 +36,7 @@ cookbook 'openstack-bare-metal', github: 'stackforge/cookbook-openstack-bare-met
 cookbook 'openstack-block-storage', github: 'stackforge/cookbook-openstack-block-storage', branch: "master"
 cookbook 'openstack-client', github: 'stackforge/cookbook-openstack-client', branch: "master"
 cookbook 'openstack-common', github: 'stackforge/cookbook-openstack-common', branch: "master"
-
-cookbook 'openstack-compute', github: 'csibbitt/cookbook-openstack-compute', branch: "hacking"
-
+cookbook 'openstack-compute', github: 'stackforge/cookbook-openstack-compute', branch: "master"
 cookbook 'openstack-dashboard', github: 'stackforge/cookbook-openstack-dashboard', branch: "master"
 cookbook 'openstack-database', github: 'stackforge/cookbook-openstack-database', branch: "master"
 cookbook 'openstack-data-processing', github: 'stackforge/cookbook-openstack-data-processing', branch: "master"
