@@ -1,0 +1,77 @@
+{
+    "name": "vagrant-aio-neutron",
+    "description": "Defines the necessary attributes for a working all-in-one openstack deployment",
+    "cookbook_versions": {
+    },
+    "json_class": "Chef::Environment",
+    "chef_type": "environment",
+    "default_attributes": {
+    },
+    "override_attributes": {
+        "mysql": {
+            "allow_remote_root": true,
+            "root_network_acl": ["%"]
+        },
+        "openstack": {
+            "endpoints": {
+                "bind-host": "0.0.0.0",
+		"host": "192.168.2.7"
+            },
+            "network": {
+                "service_plugins": [ "neutron.services.l3_router.l3_router_plugin.L3RouterPlugin" ],
+                "dhcp": {
+                    "enable_isolated_metadata": "True"
+                },
+                "openvswitch": {
+                    "tunnel_id_ranges": "1:1000",
+                    "enable_tunneling": "True",
+                    "tunnel_type": "gre",
+                    "tenant_network_type": "gre"
+                },
+                "quota": {
+                    "floatingip": "10"
+                },
+                "linuxbridge": {
+                    "firewall_driver": "neutron.agent.linux.iptables_firewall.IptablesFirewallDriver"
+                },
+                "l3":{
+                    "external_network_bridge_interface": "p4p1"
+                }
+            },
+            "block-storage": {
+                "volume": {
+                    "create_volume_group": true,
+                    "create_volume_group_type": "file",
+                    "default_volume_type": "lvm",
+                    "volume_group": "LVM_iSCSI_lofile",
+                    "volume_group_size": "100",
+
+                    "volume_clear_size": 1 //Until ionice patch
+                }
+            },
+            "image": {
+                "image_upload": true,
+                "upload_images": [
+                    "cirros",
+		    "ubuntu-trusty"
+                ],
+                "upload_image": {
+                    "cirros": "https://launchpad.net/cirros/trunk/0.3.0/+download/cirros-0.3.0-x86_64-disk.img",
+                    "ubuntu-trusty": "http://uec-images.ubuntu.com/trusty/current/trusty-server-cloudimg-amd64-disk1.img"
+                }
+            },
+            "compute": {
+                "config": {
+                    "allow_same_net_traffic": true //Want false?
+                },
+                "enabled_apis": "ec2,osapi_compute",
+                "network": {
+                    "service_type": "neutron"
+                }
+            },
+            "secret": {
+              "key_path": "/usr/local/src/openstack-chef-repo/.chef/encrypted_data_bag_secret"
+            }
+        }
+    }
+}
