@@ -31,21 +31,14 @@
                 "quota": {
                     "floatingip": "10"
                 },
-                "linuxbridge": {
-                    "firewall_driver": "neutron.agent.linux.iptables_firewall.IptablesFirewallDriver"
-                },
                 "l3":{
                     "external_network_bridge_interface": "p4p1"
                 }
             },
             "block-storage": {
                 "volume": {
-                    "create_volume_group": true,
-                    "create_volume_group_type": "file",
                     "default_volume_type": "lvm",
-                    "volume_group": "LVM_iSCSI_lofile",
-                    "volume_group_size": "100",
-
+                    "volume_group": "CINDER_LVM_ISCSI_DAS_RAID1_VG",
                     "volume_clear_size": 1 //Until ionice patch
                 }
             },
@@ -61,9 +54,6 @@
                 }
             },
             "compute": {
-                "config": {
-                    "allow_same_net_traffic": true //Want false?
-                },
                 "enabled_apis": "ec2,osapi_compute",
                 "network": {
                     "service_type": "neutron"
