@@ -1,0 +1,118 @@
+TODO
+==
+* Cinder in dashboard
+* Repartition
+* proper repo
+* passwords & secrets
+* test / contribute openstack-compute/recipes/nova-setup.rb --pool for add_floaters
+* cinder clear ionice patch
+* heat
+* ddns when floating IP associated
+* fwaas
+* lbaas
+
+MOAR BOXES:
+* OMD w/ raid alerts
+* Dev box (bleeding ubuntu)
+* btcd
+* freepbx
+* sleeper
+* Public LAMP webserver
+* Private LAMP webserver
+* KSP server
+* Backup to Amazon $60/yr
+
+1.5TB CINDER_LVM_ISCSI_DAS_RAID1_VG
+
+/etc/rc.local
+/etc/network/interfaces
+/usr/local/src/openstack-chef-repo/*.diff
+
+Removed RUN+="socket://..." line /lib/udev/rules.d/95-multipath.rules (https://bugs.launchpad.net/ubuntu/+source/multipath-tools/+bug/1240049)
+
+neutron net-create "Home LAN" --router:external True --provider:physical_network default --provider:network_type flat
+neutron subnet-create "Home LAN" --name ext-subnet --allocation-pool start=192.168.2.150,end=192.168.2.180  --disable-dhcp --gateway 192.168.2.1 192.168.2.0/24
+
+
+-=-=-=-=-=-=-=-=-=-=-
+
+Win32 Disk Imager
+
+Guided LVM
+
+Static networking
+
+SSH + Virtual Machine Host
+
+## LVM setup
+Majority of space an unused LVM partition for cinder
+40G for base system (initial install is ~5G)
++ image space
++ snapshot space
++ object storage
+
+On 2T I put 1.5T for cinder
+
+Set Static IP
+==
+sudo vim /etc/network/interfaces
+
+Get updates
+==
+sudo aptitude update && sudo aptitude upgrade
+sudo reboot 
+(new kernel)
+
+Take ownership of /usr/local/src and work there
+==
+cd /usr/local/src
+sudo chown `whoami` .
+
+install chefDK
+==
+wget https://opscode-omnibus-packages.s3.amazonaws.com/ubuntu/12.04/x86_64/chefdk_0.4.0-1_amd64.deb
+sudo dpkg -i chefdk_0.4.0-1_amd64.deb
+
+get stackforge repo & deps
+==
+sudo aptitude install git
+git clone https://github.com/stackforge/openstack-chef-repo.git openstack-chef-repo
+berks vendor ./cookbooks
+
+customize
+==
+Created environments/fractalcube-aio-nova.json
+rm .chef/knife.rb
+
+Prepare 
+==
+export EDITOR=vim
+knife node create stacker -z
+knife node edit -z stacker
+(set "run_list": "role[allinone-compute],role[os-image-upload]", "chef_environment": "fractalcube-aio-nova")
+
+Preview
+==
+sudo chef-client -z -o fractalcube-openstack::install-mysql2-gem
+sudo chef-client -z -W --force-formatter | less -r
+
+Go for it
+==
+sudo chef-client -z --force-formatter | tee ~/first-chef-run.out | less -r
+
+
+-=-=-=-=-=-=-=-=-=-=-
+
+
+***** install vagrant
+==
+wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.2_x86_64.deb
+sudo dpkg -i vagrant_1.7.2_x86_64.deb
+
+
+
+
+
+
+
+
