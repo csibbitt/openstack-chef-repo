@@ -1,9 +1,9 @@
 TODO
 ==
 * Cinder in dashboard
+* vagrant alongside
 * proper repo
 * passwords & secrets
-* vagrant alongside
 * test / contribute openstack-compute/recipes/nova-setup.rb --pool for add_floaters
 * cinder clear ionice patch
 * heat
@@ -12,11 +12,10 @@ TODO
 * lbaas
 
 MOAR BOXES:
-* OMD w/ raid alerts
-* Dev box (bleeding ubuntu)
-* btcd
 * freepbx
 * sleeper
+* btcd
+* Dev box (bleeding ubuntu)
 * Public LAMP webserver
 * Private LAMP webserver
 * KSP server
@@ -114,15 +113,17 @@ Create users and projects and routers
 -=-=-=-=-=-=-=-=-=-=-
 
 
-***** install vagrant
+sudo aptitude install check-mk-agent check-mk-agent-logwatch xinetd
+enable it in xinet.d/conf
+sudo apt-get install lm-sensors
+fractalcube-files/check_temp.sh
+it87 in /etc/modules13
+
+***** install vagrant + virtualbox (why not, right?)
 ==
+sudo aptitude install virtualbox
 wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.2_x86_64.deb
 sudo dpkg -i vagrant_1.7.2_x86_64.deb
 
-
-
-
-
-
-
+sudo apt-get install iotop
 

@@ -18,6 +18,7 @@
 		"host": "192.168.2.7"
             },
             "network": {
+                "allow_overlapping_ips": "True",
                 "service_plugins": [ "neutron.services.l3_router.l3_router_plugin.L3RouterPlugin" ],
                 "dhcp": {
                     "enable_isolated_metadata": "True"
