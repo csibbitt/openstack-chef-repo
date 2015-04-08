@@ -55,6 +55,9 @@
                 }
             },
             "compute": {
+                "config": {
+                  "allow_resize_to_same_host": "True"
+                },
                 "enabled_apis": "ec2,osapi_compute",
                 "network": {
                     "service_type": "neutron"

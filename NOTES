@@ -1,25 +1,22 @@
 TODO
 ==
-* Cinder in dashboard
-* vagrant alongside
-* proper repo
 * passwords & secrets
+* proper repo
 * test / contribute openstack-compute/recipes/nova-setup.rb --pool for add_floaters
 * cinder clear ionice patch
+* volume endpoint patch
+* fwaas for DMZ
 * heat
 * ddns when floating IP associated
-* fwaas
-* lbaas
 
 MOAR BOXES:
-* freepbx
-* sleeper
-* btcd
+* ghost 
 * Dev box (bleeding ubuntu)
+* sleeper
 * Public LAMP webserver
 * Private LAMP webserver
 * KSP server
-* Backup to Amazon $60/yr
+* Backup to Mega
 
 
 -=-=-=-=-=-=-=-=-=-=-
@@ -41,6 +38,10 @@ On 2T I put 1.5T for cinder
 * Format swap
 * 2 VGs: ROOT_VG, CINDER_LVM_ISCSI_DAS_RAID1_VG
 * 1 LV: ROOTFS_LV
+
+Disable multipath
+==
+update-rc.d multipath-tools disable
 
 Get updates
 ==
@@ -73,6 +74,10 @@ Hack
 /usr/local/src/openstack-chef-repo/*.diff (Required l3_agent.rb.diff before chef client run)
 /etc/init/plymouth-upstart-bridge.conf (http://www.unrelatedshit.com/2014/07/30/kvm-too-fast-for-plymouth-upstart-bridge/)
 /lib/udev/rules.d/95-multipath.rules (https://bugs.launchpad.net/ubuntu/+source/multipath-tools/+bug/1240049)
+apt-get download openstack-dashboard
+apt-get download openstack-dashboard-ubuntu-theme
+apt-get download python-django-horizon
+sudo dpkg --force-depends -i openstack-dashboard_1%3a2015.1~b3-0ubuntu1~cloud0_all.deb openstack-dashboard-ubuntu-theme_1%3a2015.1~b3-0ubuntu1~cloud0_all.deb python-django-horizon_1%3a2015.1~b3-0ubuntu1~cloud0_all.deb
 
 Prepare 
 ==
@@ -109,7 +114,13 @@ neutron subnet-create "Home LAN" --name ext-subnet --allocation-pool start=192.1
 Create users and projects and routers
 ==
 
+Fix cinder + horizon
+==
+keystone service-create --name cinderv1 --type volume --description "Legacy volume API endpoint for horizon" --region=RegionOne
+keystone endpoint-create --service cinderv1 --publicurl http://192.168.2.7:8776/v1/%\(tenant_id\)s --adminurl  http://192.168.2.7:8776/v1/%\(tenant_id\)s --internalurl  http://192.168.2.7:8776/v1/%\(tenant_id\)s --region=RegionOne
 
+keystone --os-region-name RegionOne service-create --name cinder4horizon --type volume --description "Legacy volume type endpoint for horizon to see"
+keystone endpoint-create --service cinder4horizon --publicurl http://192.168.2.7:8776/v2/%\(tenant_id\)s --adminurl  http://192.168.2.7:8776/v2/%\(tenant_id\)s --internalurl  http://192.168.2.7:8776/v2/%\(tenant_id\)s --region=RegionOne
 -=-=-=-=-=-=-=-=-=-=-
 
 
@@ -119,11 +130,11 @@ sudo apt-get install lm-sensors
 fractalcube-files/check_temp.sh
 it87 in /etc/modules13
 
-***** install vagrant + virtualbox (why not, right?)
+***** install vagrant + virtualbox (why not, right? oops, because VBox won't run alongside KVM)
 ==
-sudo aptitude install virtualbox
 wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.2_x86_64.deb
 sudo dpkg -i vagrant_1.7.2_x86_64.deb
 
 sudo apt-get install iotop
+
 
