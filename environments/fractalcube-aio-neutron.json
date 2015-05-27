@@ -38,8 +38,20 @@
             },
             "block-storage": {
                 "volume": {
-                    "default_volume_type": "lvm",
+                    "default_volume_type": "LVM_ISCSI_DAS_RAID1",
                     "volume_group": "CINDER_LVM_ISCSI_DAS_RAID1_VG",
+                    "multi_backend": {
+			"raid1": {
+			    "volume_driver": "cinder.volume.drivers.lvm.LVMVolumeDriver",
+	                    "volume_group": "CINDER_LVM_ISCSI_DAS_RAID1_VG",
+			    "volume_backend_name": "LVM_ISCSI_DAS_RAID1"
+			},
+			"noraid": {
+			    "volume_driver": "cinder.volume.drivers.lvm.LVMVolumeDriver",
+                            "volume_group": "CINDER_LVM_ISCSI_DAS_DISKS_VG",
+                            "volume_backend_name": "LVM_ISCSI_DAS_DISKS"
+			}
+                    },
                     "volume_clear_size": 1 //Until ionice patch
                 }
             },
