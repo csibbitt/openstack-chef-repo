@@ -31,21 +31,3 @@ cookbook 'yum', '3.5.4'
 cookbook 'selinux', '0.9.0'
 cookbook 'yum-epel', '0.6.0'
 cookbook 'statsd', github: 'att-cloud/cookbook-statsd'
-
-cookbook 'openstack-bare-metal', github: 'stackforge/cookbook-openstack-bare-metal', branch: "master"
-cookbook 'openstack-block-storage', github: 'stackforge/cookbook-openstack-block-storage', branch: "master"
-cookbook 'openstack-client', github: 'stackforge/cookbook-openstack-client', branch: "master"
-cookbook 'openstack-common', github: 'stackforge/cookbook-openstack-common', branch: "master"
-cookbook 'openstack-compute', github: 'stackforge/cookbook-openstack-compute', branch: "master"
-cookbook 'openstack-dashboard', github: 'stackforge/cookbook-openstack-dashboard', branch: "master"
-cookbook 'openstack-database', github: 'stackforge/cookbook-openstack-database', branch: "master"
-cookbook 'openstack-data-processing', github: 'stackforge/cookbook-openstack-data-processing', branch: "master"
-cookbook 'openstack-identity', github: 'stackforge/cookbook-openstack-identity', branch: "master"
-cookbook 'openstack-image', github: 'stackforge/cookbook-openstack-image', branch: "master"
-cookbook 'openstack-integration-test', github: 'stackforge/cookbook-openstack-integration-test', branch: "master"
-cookbook 'openstack-network', github: 'stackforge/cookbook-openstack-network', branch: "master"
-cookbook 'openstack-object-storage', github: 'stackforge/cookbook-openstack-object-storage', branch: "master"
-cookbook 'openstack-ops-database', github: 'stackforge/cookbook-openstack-ops-database', branch: "master"
-cookbook 'openstack-ops-messaging', github: 'stackforge/cookbook-openstack-ops-messaging', branch: "master"
-cookbook 'openstack-orchestration', github: 'stackforge/cookbook-openstack-orchestration', branch: "master"
-cookbook 'openstack-telemetry', github: 'stackforge/cookbook-openstack-telemetry', branch: "master"
