@@ -15,7 +15,6 @@ MOAR BOXES:
 * sleeper
 * Public LAMP webserver
 * Private LAMP webserver
-* KSP server
 * Backup to Mega
 
 
@@ -114,6 +113,10 @@ neutron subnet-create "Home LAN" --name ext-subnet --allocation-pool start=192.1
 Create users and projects and routers
 ==
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 8d2170db46ee57d417765707dc5741f8bc763edc
 Fix cinder + horizon
 ==
 keystone service-create --name cinderv1 --type volume --description "Legacy volume API endpoint for horizon" --region=RegionOne
@@ -130,11 +133,18 @@ sudo apt-get install lm-sensors
 fractalcube-files/check_temp.sh
 it87 in /etc/modules13
 
+<<<<<<< HEAD
 ***** install vagrant + virtualbox (why not, right? oops, because VBox won't run alongside KVM)
+=======
+install vagrant + virtualbox (why not, right? oops, because VBox won't run alongside KVM)
+>>>>>>> 8d2170db46ee57d417765707dc5741f8bc763edc
 ==
 wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.2_x86_64.deb
 sudo dpkg -i vagrant_1.7.2_x86_64.deb
 
 sudo apt-get install iotop
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8d2170db46ee57d417765707dc5741f8bc763edc
